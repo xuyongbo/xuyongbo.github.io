@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 风晚初晨的技术博客</title>
+  <title>架构设计之MVC引发的MV(X) | 风晚初晨的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="风晚初晨的技术博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="背景说起iOS架构设计，可能最先想到的就是经典的MVC架构模式，有业务模块内MVC，也有业务模块外MVC，然而随着业务从简单到复杂，不断的进行版本迭代，我们会逐渐产生一种困惑，那就是Controller变得越来越胖，尤其是那些比较复杂的页面，好像我们把那些不能放在View和Model中的代码全都分给了Controller，而且Controller很少能够进行复用。于是，大家为了根据自己的业务重新定">
+<meta name="keywords" content="架构设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="架构设计之MVC引发的MV(X)">
+<meta property="og:url" content="http://yoursite.com/2018/06/29/架构设计之MVC引发的MVX/index.html">
 <meta property="og:site_name" content="风晚初晨的技术博客">
+<meta property="og:description" content="背景说起iOS架构设计，可能最先想到的就是经典的MVC架构模式，有业务模块内MVC，也有业务模块外MVC，然而随着业务从简单到复杂，不断的进行版本迭代，我们会逐渐产生一种困惑，那就是Controller变得越来越胖，尤其是那些比较复杂的页面，好像我们把那些不能放在View和Model中的代码全都分给了Controller，而且Controller很少能够进行复用。于是，大家为了根据自己的业务重新定">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/06/29/架构设计之MVC引发的MVX/mvc.png">
+<meta property="og:updated_time" content="2018-07-08T14:54:34.300Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="风晚初晨的技术博客">
+<meta name="twitter:title" content="架构设计之MVC引发的MV(X)">
+<meta name="twitter:description" content="背景说起iOS架构设计，可能最先想到的就是经典的MVC架构模式，有业务模块内MVC，也有业务模块外MVC，然而随着业务从简单到复杂，不断的进行版本迭代，我们会逐渐产生一种困惑，那就是Controller变得越来越胖，尤其是那些比较复杂的页面，好像我们把那些不能放在View和Model中的代码全都分给了Controller，而且Controller很少能够进行复用。于是，大家为了根据自己的业务重新定">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/29/架构设计之MVC引发的MVX/mvc.png">
   
     <link rel="alternative" href="/atom.xml" title="风晚初晨的技术博客" type="application/atom+xml">
   
@@ -166,36 +173,73 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-架构设计之MVC引发的MVX" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/29/架构设计之MVC引发的MVX/" class="archive-article-date">
-  	<time datetime="2018-06-29T13:47:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/29/架构设计之MVC引发的MVX/">架构设计之MVC引发的MV(X)</a>
+    <h1 class="article-title" itemprop="name">
+      架构设计之MVC引发的MV(X)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/06/29/架构设计之MVC引发的MVX/" class="archive-article-date">
+  	<time datetime="2018-06-29T13:47:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>说起iOS架构设计，可能最先想到的就是经典的MVC架构模式，有业务模块内MVC，也有业务模块外MVC，然而随着业务从简单到复杂，不断的进行版本迭代，我们会逐渐产生一种困惑，那就是<code>Controller</code>变得越来越胖，尤其是那些比较复杂的页面，好像我们把那些不能放在<code>View</code>和<code>Model</code>中的代码全都分给了<code>Controller</code>，而且<code>Controller</code>很少能够进行复用。于是，大家为了根据自己的业务重新定义分层，慢慢就衍生了MVVM、MVP、VIPER等这些架构模式，我们常统称为MV(X)模式。</p>
+<p>本篇先不讲如何给MVC里的<code>Controller</code>瘦身，后续会专门整理一篇文章来进行说明。既然目前有这些主流的架构模式，而且有时候在面试的时候经常会被问到，那我们就好好来总结一下吧。</p>
+<h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><p>MVC全称是<code>Model - View - Controller</code>，是Xerox PARC在20世纪80年代在实验室为编程语言Smalltalk－80发明的一种软件设计模式，现在已经成为一种经典又主流的设计模式。它的作用主要是将软件的业务逻辑，数据和UI分离开来，避免相互耦合，提高可复用性。<br><img src="/2018/06/29/架构设计之MVC引发的MVX/mvc.png" alt="MVC"><br>上图很详细的说明了iOS的MVC模式中Model-View-Controller三者之间相互通讯的方式</p>
+<ul>
+<li>View和Model不可以直接通讯，而是以Controller为中转站，而Controller可以无障碍访问Model和View层；</li>
+<li>Model发生变化通过Notification或KVO来告知所有监听者；</li>
+<li>View和Controller之间则通过target-action、delegate、datasource来通讯；</li>
+</ul>
+<h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><p>MVVM是Model-View-ViewModel的缩写，最早是 2005 年微软的 WPF 和 Silverlight 的架构师 John Gossman 提出的，之前有做过WP开发，Silverlight是支持双向绑定的，确实很方便。</p>
+<p>个人觉得iOS中的MVVM设计模式其实是基于MVC演化而来，它是将View和ViewController统一归到View中，从Controller中抽出业务逻辑放到ViewModel中，Model则还是原来的Model，这样ViewController就变轻了，当然总体上代码量肯定稍微增加了，但是层次上更加清晰了。</p>
+<p>总体上看，View层引用ViewModel，ViewModel引用Model，反方向是不可以的，用了之后会发现，如果Model发生变化，刷新View很不方便，所以结合很多人在用的RAC（即ReactiveCocoa）效果会更好，相当于是增加了一个绑定方式，当然你也可以用KVO，但RAC可不是基于KVO实现的。</p>
+<h3 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h3><p>MVP是Model-View-Presenter的缩写，毫无疑问，它也是基于MVC演化而来。View跟MVVM中的View一样，包含了View组件和ViewController，Model仍是原来的Model，Presenter则是View和Model的中转站，负责取数据给Model，Model变化时告知View。</p>
+<p>View层把自己所有的处理权都交给了Presenter，二者之间的交互是双向的，用户触发了UI事件，会告诉Presenter，Presenter也可以命令UI做对应操作，Presenter持有View和Model。</p>
+<p>流程：<br>用户交互 -&gt; View获得交互事件 -&gt; View转发事件给Presenter -&gt; Presenter调Model获取数据 -&gt; Presenter推数据给View展示</p>
+<h3 id="VIPER"><a href="#VIPER" class="headerlink" title="VIPER"></a>VIPER</h3><p>VIPER是View - Interactor - Presenter - Entity - Routing的简写，职责如下：</p>
+<p>View：UI展示、检测用户交互、具体显示什么由Presenter告知；<br>Interactor：中心枢纽，执行业务逻辑，主要围绕数据，如网络请求、本地持久化；<br>Presenter：告诉View展示什么，以及处理事件，如数据解析以及格式化，；<br>Entity：普通的数据实体；<br>Router：连接上面的各个分层，实现路由导航；</p>
+<p>该设计模式其实是把职责划分的更加清晰，层与层变得更加容易测试，VIPER其实是模拟了用户使用应用的整个过程，且让路由导航在iOS中成为可能。</p>
+<p>暂时先写到这，其实还不够清楚，后续会补充流程图对比，以及Demo，未完待续……</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -207,57 +251,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/29/架构设计之MVC引发的MVX/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/24/记WWDC-2018/" class="archive-article-date">
-  	<time datetime="2018-06-24T14:56:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-24</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/24/记WWDC-2018/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">记WWDC 2018</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/24/记WWDC-2018/">记WWDC 2018</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -280,8 +373,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
