@@ -340,7 +340,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>虽然做了软件开发好几年，说来惭愧，大学学的数据结构的知识毕了业之后全部都还给老师了，至今如果让自己非常全面的解释一下堆与栈的特点以及相互之前的区别，依然无法很清晰的说明白，即使是平时开发的过程中都有意无意的涉及到，因此写一篇文章好好总结总结，以做巩固和梳理。</p>
+<h2 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h2><ul>
+<li>栈区：由编译器自动分配释放 ，存放函数的参数名，局部变量的名等。其操作方式类似于数据结构中的栈。</li>
+<li>堆区：由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收。注意它与数据结构中的堆是两回事，分配方式倒是类似于链表。</li>
+<li>静态区：全局变量和局部静态变量的存储是放在一块的。程序结束后由系统释放。</li>
+<li>常量区：常量字符串就是放在这里的，程序结束后由系统释放。</li>
+<li>代码区：存放函数体的二进制代码。</li>
+</ul>
+<h2 id="什么是堆栈"><a href="#什么是堆栈" class="headerlink" title="什么是堆栈"></a>什么是堆栈</h2><h3 id="栈（stack）"><a href="#栈（stack）" class="headerlink" title="栈（stack）"></a>栈（stack）</h3><p>栈是一个有序线性表，只能在表的一端（即栈顶，Top）执行插入和删除的操作，最后插入的元素将第一个被删除，所以栈也称为后进先出(LIFO)或先进后出(FILO)的线性表。</p>
+<h3 id="堆（heap）"><a href="#堆（heap）" class="headerlink" title="堆（heap）"></a>堆（heap）</h3><ul>
+<li>堆区：</li>
+<li>数据结构的堆：堆是一棵具有特定性质的二叉树，堆的基本要求是堆中所有结点的值都要大于或等于（小于或等于）其所有孩子结点的值，另外一个性质是当堆的高度h&gt;0时，所有叶子结点都处于第h和h-1层，就是说，堆是一棵完全二叉树。</li>
+</ul>
+<h3 id="区别与联系"><a href="#区别与联系" class="headerlink" title="区别与联系"></a>区别与联系</h3><ul>
+<li>空间分配：栈由操作系统自动分配和释放，存放函数的参数名和局部变量的变量名。堆则由开发者分配和释放，容易产生内存碎片，开发者不释放，则程序结束时可能由操作系统回收。</li>
+<li>缓存方式：栈使用一级缓存，调用时在存储空间，使用完之后立即释放。堆使用的是二级缓存，由虚拟机的垃圾回收机制来决定。</li>
+<li>存取速度：栈的存取速度比堆快，仅次于CPU的寄存器，但数据大小和生命周期是确定的，且在多个线程和多个栈之间无法共享，栈内可以共享，堆可以动态分配内存大小，生命周期也不必提前告诉编译器，且垃圾回收器可自动回收，但因动态分配，存取速度慢。</li>
+<li>线程共享：每个线程都有自己独立的线程栈，栈在线程间无法共享。而堆则是所有线程共享的，既方便了线程之间进行数据交互，同时也节省了很多内存空间。</li>
+<li>数据结构：栈是先进后出的线性表，堆是一棵完全二叉树。</li>
+</ul>
+<p>参考：<a href="https://www.cnblogs.com/huangfuyuan/p/9150362.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangfuyuan/p/9150362.html</a></p>
+
       
 
       
@@ -348,6 +369,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -691,11 +723,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">架构设计</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">架构设计</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
             
             <div class="clearfix"></div>
